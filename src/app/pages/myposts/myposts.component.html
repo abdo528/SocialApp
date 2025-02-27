@@ -1,0 +1,53 @@
+<section>
+    <h1 class="text-5xl text-blue-500 text-center">{{pageInfo.total}}Posts</h1>
+    @for (post of showPosts; track post._id) {
+    <div class="bg-white w-1/2 mx-auto rounded shadow p-5 my-8">
+        <div class="flex items-center gap-5 mb-3">
+            <img [src]="post.user.photo" class="w-8 h-8 rounded-full" [alt]="post.user._id">
+            <div>
+                <h4>{{post.user.name}}</h4>
+                <p>{{post.createdAt|date}}</p>
+            </div>
+            <!-- <i (click)="updatePosts(post.id)" class="fa-regular fa-pen-to-square"></i>
+            <i (click)="deletePosts(post.id)" class="fa-solid fa-trash"></i> -->
+        </div>
+        <p>{{post.body}}</p>
+        <img class="rounded w-full my-3" [src]="post.image" [alt]="post.id">
+        <span class="text-blue-700 cursor-pointer" #hide>Show Comment</span>
+        @defer (on interaction(hide)) {
+        <app-comment [idPost]="post._id"></app-comment>
+        }
+    </div>
+    }
+</section>
+
+<nav aria-label="Page navigation example">
+    <ul class="flex items-center justify-center -space-x-px h-8 text-sm">
+        <li>
+            <a (click)="previous()"
+                class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                <span class="sr-only">Previous</span>
+                <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5 1 1 5l4 4" />
+                </svg>
+            </a>
+        </li>
+        <li>
+            <a
+                class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{pageInfo.currentPage}}</a>
+        </li>
+        <li>
+            <a (click)="next()"
+                class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                <span class="sr-only">Next</span>
+                <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m1 9 4-4-4-4" />
+                </svg>
+            </a>
+        </li>
+    </ul>
+</nav>

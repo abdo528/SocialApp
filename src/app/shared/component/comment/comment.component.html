@@ -1,0 +1,31 @@
+<section>
+    <div class="overflow-auto h-32 my-2">
+        @for (coment of showComment; track coment._id) {
+        <div class="bg-gray-200 rounded p-5 my-2">
+            <div class="flex gap-5">
+                <img class="w-8 h-8 rounded-full" [src]="coment.commentCreator.photo" [alt]="coment.commentCreator._id">
+                <h4>{{coment.commentCreator.name}}</h4>
+                <p>{{coment.createdAt|date}}</p>
+                <!-- <i (click)="udatecomments(coment.id)" class="fa-regular fa-pen-to-square"></i>
+                <i (click)="deletecomments(coment.id)" class="fa-solid fa-trash"></i> -->
+            </div>
+            <p>{{coment.content}}</p>
+        </div>
+        }
+    </div>
+    <form [formGroup]="post" (submit)="createcomments()">
+        <div class="flex items-center px-3 py-2 rounded-lg bg-gray-200 dark:bg-gray-700">
+            <textarea rows="1" formControlName="content"
+                class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Your Comment..."></textarea>
+            <button type="submit"
+                class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
+                <svg class="w-5 h-5 rotate-90 rtl:-rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 18 20">
+                    <path
+                        d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z" />
+                </svg>
+            </button>
+        </div>
+    </form>
+</section>
